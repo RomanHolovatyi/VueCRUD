@@ -3,7 +3,7 @@
     <v-flex fluid>
       <v-card fluid>
         <v-card-title>
-          <span class="headline">{{ getActionType }} news</span>
+          <span class="headline">{{ getActionType }} item</span>
         </v-card-title>
         <v-card-text>
           <v-flex xs12>
@@ -14,7 +14,7 @@
             />
           </v-flex>
           <v-flex xs12>
-            <v-text-area
+            <v-textarea
               v-model="formData.description"
               label="Description"
               @blur="$v.formData.description.$touch()"
@@ -32,17 +32,40 @@
 </template>
 
 <script>
-export default {
-  name: 'TableItem',
-  data () {
-    return {
+  import { required } from 'vuelidate/lib/validators'
+  // import { mapActions } from 'vuex'
+
+  export default {
+    name: 'TableItem',
+    data () {
+      return {
+        formData: {
+          name: '',
+          description: ''
+        }
+      }
+    },
+    computed: {
+      getActionType () {
+        return 'create'
+      }
+    },
+    validations: {
       formData: {
-        name: '',
-        description: ''
+        name: {
+          required
+        },
+        description: {
+          required
+        }
+      }
+    },
+    methods: {
+      cancel () {
+        this.$router.push({ path: '/' })
       }
     }
   }
-}
 </script>
 
 <style scoped>

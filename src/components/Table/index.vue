@@ -43,7 +43,7 @@
       </template>
     </v-data-table>
     <div class="text-xs-center pt-2">
-      <v-btn color="primary" @click="createNewItem">Create New Item</v-btn>
+      <v-btn color="blue darken-1" @click="createNewItem">Create New Item</v-btn>
     </div>
   </div>
 </template>
@@ -71,6 +71,11 @@ export default {
           description: 'wq qur weufewu wefwf'
         }
       ]
+    }
+  },
+  methods: {
+    createNewItem () {
+      this.$router.push({ path: '/table-item' })
     }
   }
 }
