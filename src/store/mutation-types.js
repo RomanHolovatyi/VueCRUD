@@ -1,0 +1,1 @@
+export const SET_TABLE_ITEMS = 'SET_TABLE_ITEMS'
