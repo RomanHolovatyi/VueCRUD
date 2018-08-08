@@ -9,8 +9,8 @@
     >
       <template slot="items" slot-scope="props">
         <td class="text-xs-left">{{ props.item.id }}</td>
-        <td class="text-xs-center">{{ props.item.name }}</td>
-        <td class="text-xs-center">{{ props.item.description }}</td>
+        <td class="text-xs-left">{{ props.item.name }}</td>
+        <td class="text-xs-left">{{ props.item.description }}</td>
         <td class="text-xs-center">
           <v-btn
             color="blue"
@@ -93,8 +93,8 @@
             sortable: false,
             value: 'name'
           },
-          { text: 'Name', value: 'name', align: 'center', sortable: true },
-          { text: 'Description', value: 'description', align: 'center', sortable: true },
+          { text: 'Name', value: 'name', align: 'left', sortable: true },
+          { text: 'Description', value: 'description', align: 'left', sortable: true },
           { text: 'Actions', align: 'center', value: 'actions', sortable: false }
         ],
         isDeleteModalOpen: false,

@@ -52,7 +52,7 @@
         'getTableItemById'
       ]),
       getActionType () {
-        return 'create'
+        return this.isNewItem ? 'Create' : 'Edit'
       },
       isNewItem () {
         return this.$route.params.id === 'create'
