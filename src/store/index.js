@@ -9,11 +9,7 @@ const state = {
 }
 
 const getters = {
-  getTableItemById (id) {
-    return state.tableData.filter((item) => {
-      return item.id === id
-    })
-  }
+  getTableItemById: state => id => state.tableData.find(item => item.id === id)
 }
 
 const actions = {
