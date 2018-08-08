@@ -14,6 +14,7 @@ const getters = {
 
 const actions = {
   createTableItem ({ commit }, newItem) {
+    console.log('newItem', newItem)
     const newTableData = [ ...state.tableData, newItem ]
     commit(types.SET_TABLE_ITEMS, newTableData)
   },
@@ -27,8 +28,8 @@ const actions = {
     const newTableData = state.tableData.map((tableItem) => {
       if (tableItem.id === editedItem.id) {
         tableItem = { ...editedItem }
-        return tableItem
       }
+      return tableItem
     })
     commit(types.SET_TABLE_ITEMS, newTableData)
   }

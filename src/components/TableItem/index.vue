@@ -53,6 +53,9 @@
       ]),
       getActionType () {
         return 'create'
+      },
+      isNewItem () {
+        return this.$route.params.id === 'create'
       }
     },
     validations: {
@@ -87,13 +90,17 @@
       save () {
         this.$v.formData.$touch()
         if (this.$v.formData.$invalid) return
-        this.formData.id = this.createId()
-        this.createTableItem(this.formData)
+        if (this.isNewItem) {
+          this.formData.id = this.createId()
+          this.createTableItem(this.formData)
+        } else {
+          this.editTableItem(this.formData)
+        }
         this.cancel()
       }
     },
     mounted () {
-      if (this.$route.params.id !== 'create') {
+      if (!this.isNewItem) {
         this.formData = this.getTableItemById(this.$route.params.id)
       }
     }

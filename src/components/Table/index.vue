@@ -69,7 +69,7 @@
           <v-btn
             color="primary"
             flat
-            @click="deleteTableItem(activeItemId)"
+            @click="removeItem"
           >
             Delete
           </v-btn>
@@ -122,6 +122,10 @@
       },
       editItem (id) {
         this.$router.push({ path: `/table-item/${id}` })
+      },
+      removeItem () {
+        this.deleteTableItem(this.activeItemId)
+        this.closeDeleteItemModal()
       }
     }
   }
