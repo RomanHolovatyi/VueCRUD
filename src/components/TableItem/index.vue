@@ -22,8 +22,8 @@
           </v-flex>
           <v-card-actions>
             <v-spacer/>
-            <v-btn color="red darken-1" flat @click.stop="cancel">Cancel</v-btn>
-            <v-btn color="blue darken-1" flat @click.stop="save">Save</v-btn>
+            <v-btn color="red darken-1" flat @click="cancel">Cancel</v-btn>
+            <v-btn color="blue darken-1" flat @click="save">Save</v-btn>
           </v-card-actions>
         </v-card-text>
       </v-card>
@@ -33,7 +33,7 @@
 
 <script>
   import { required } from 'vuelidate/lib/validators'
-  // import { mapActions } from 'vuex'
+  import { mapActions } from 'vuex'
 
   export default {
     name: 'TableItem',
@@ -61,8 +61,17 @@
       }
     },
     methods: {
+      ...mapActions([
+        'createTableItem',
+        'editTableItem'
+      ]),
       cancel () {
         this.$router.push({ path: '/' })
+      },
+      save () {
+        this.$v.formData.$touch()
+        if (this.$v.formData.$invalid) return
+        this.createTableItem(this.formData)
       }
     }
   }

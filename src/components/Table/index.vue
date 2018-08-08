@@ -2,7 +2,7 @@
   <div class="mt-3">
     <v-data-table
       :headers="headers"
-      :items="tableItems"
+      :items="tableData"
       disable-initial-sort
       hide-actions
       class="elevation-1"
@@ -49,36 +49,42 @@
 </template>
 
 <script>
-export default {
-  name: 'Table',
-  data () {
-    return {
-      headers: [
-        {
-          text: 'id',
-          align: 'left',
-          sortable: false,
-          value: 'name'
-        },
-        { text: 'Name', value: 'name', align: 'center', sortable: true },
-        { text: 'Description', value: 'description', align: 'center', sortable: true },
-        { text: 'Actions', align: 'center', value: 'actions', sortable: false }
-      ],
-      tableItems: [
-        {
-          id: 1,
-          name: 'name123',
-          description: 'wq qur weufewu wefwf'
-        }
-      ]
-    }
-  },
-  methods: {
-    createNewItem () {
-      this.$router.push({ path: '/table-item' })
+  import { mapState } from 'vuex'
+  export default {
+    name: 'Table',
+    data () {
+      return {
+        headers: [
+          {
+            text: 'id',
+            align: 'left',
+            sortable: false,
+            value: 'name'
+          },
+          { text: 'Name', value: 'name', align: 'center', sortable: true },
+          { text: 'Description', value: 'description', align: 'center', sortable: true },
+          { text: 'Actions', align: 'center', value: 'actions', sortable: false }
+        ],
+        tableItems: [
+          {
+            id: 1,
+            name: 'name123',
+            description: 'wq qur weufewu wefwf'
+          }
+        ]
+      }
+    },
+    computed: {
+      ...mapState([
+        'tableData'
+      ])
+    },
+    methods: {
+      createNewItem () {
+        this.$router.push({ path: '/table-item' })
+      }
     }
   }
-}
 </script>
 
 <style scoped>

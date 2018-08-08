@@ -1,1 +1,1 @@
-
+export const UPDATE_TABLE_ITEMS = 'UPDATE_TABLE_ITEMS'
