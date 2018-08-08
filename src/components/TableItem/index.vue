@@ -10,6 +10,7 @@
             <v-text-field
               v-model="formData.name"
               label="Name"
+              :error-messages="errorMessages('name')"
               @blur="$v.formData.name.$touch()"
             />
           </v-flex>
@@ -17,6 +18,7 @@
             <v-textarea
               v-model="formData.description"
               label="Description"
+              :error-messages="errorMessages('description')"
               @blur="$v.formData.description.$touch()"
             />
           </v-flex>
@@ -49,6 +51,13 @@
       getActionType () {
         return 'create'
       }
+      // errorMessages (field) {
+      //   if (this.hasFieldError) {
+      //     return 'This field is required'
+      //   } else {
+      //     return []
+      //   }
+      // }
     },
     validations: {
       formData: {
@@ -65,6 +74,14 @@
         'createTableItem',
         'editTableItem'
       ]),
+      hasFieldError (field) {
+        return this.$v.formData[field].$dirty && this.$v.formData[field].$invalid
+      },
+      errorMessages (field) {
+        return this.hasFieldError(field)
+          ? 'This field is required'
+          : []
+      },
       cancel () {
         this.$router.push({ path: '/' })
       },
