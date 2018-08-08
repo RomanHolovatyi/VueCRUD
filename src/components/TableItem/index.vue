@@ -35,7 +35,7 @@
 
 <script>
   import { required } from 'vuelidate/lib/validators'
-  import { mapActions } from 'vuex'
+  import { mapActions, mapGetters } from 'vuex'
 
   export default {
     name: 'TableItem',
@@ -48,6 +48,9 @@
       }
     },
     computed: {
+      ...mapGetters([
+        'getTableItemById'
+      ]),
       getActionType () {
         return 'create'
       }
@@ -87,6 +90,11 @@
         this.formData.id = this.createId()
         this.createTableItem(this.formData)
         this.cancel()
+      }
+    },
+    mounted () {
+      if (this.$route.params.id !== 'create') {
+        this.formData = this.getTableItemById(this.$route.params.id)
       }
     }
   }

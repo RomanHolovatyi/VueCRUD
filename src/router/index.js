@@ -14,7 +14,7 @@ export default new Router({
       component: Table
     },
     {
-      path: '/table-item',
+      path: '/table-item/:id',
       name: 'TableItem',
       component: TableItem
     }

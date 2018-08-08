@@ -17,7 +17,7 @@
             fab
             flat
             slot="activator"
-            @click="openEditAdminModal(props.item)"
+            @click="editItem(props.item.id)"
           >
             <v-icon>edit</v-icon>
           </v-btn>
@@ -111,7 +111,7 @@
         'deleteTableItem'
       ]),
       createNewItem () {
-        this.$router.push({ path: '/table-item' })
+        this.$router.push({ path: `/table-item/create` })
       },
       openDeleteItemModal (id) {
         this.activeItemId = id
@@ -119,6 +119,9 @@
       },
       closeDeleteItemModal () {
         this.isDeleteModalOpen = false
+      },
+      editItem (id) {
+        this.$router.push({ path: `/table-item/${id}` })
       }
     }
   }
