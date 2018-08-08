@@ -26,7 +26,7 @@
             fab
             flat
             slot="activator"
-            @click="openDeleteItemModal(props.item)"
+            @click="openDeleteItemModal(props.item.id)"
           >
             <v-icon>delete</v-icon>
           </v-btn>
@@ -59,8 +59,20 @@
         <v-card-title class="headline">Do you really want to delete this item?</v-card-title>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="error" flat @click="closeModal">Cancel</v-btn>
-          <v-btn color="primary" flat @click.native="dialog = false">Delete</v-btn>
+          <v-btn
+            color="error"
+            flat
+            @click="closeDeleteItemModal"
+          >
+            Cancel
+          </v-btn>
+          <v-btn
+            color="primary"
+            flat
+            @click="deleteTableItem(activeItemId)"
+          >
+            Delete
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -85,7 +97,8 @@
           { text: 'Description', value: 'description', align: 'center', sortable: true },
           { text: 'Actions', align: 'center', value: 'actions', sortable: false }
         ],
-        isDeleteModalOpen: false
+        isDeleteModalOpen: false,
+        activeItemId: ''
       }
     },
     computed: {
@@ -100,7 +113,8 @@
       createNewItem () {
         this.$router.push({ path: '/table-item' })
       },
-      openDeleteItemModal () {
+      openDeleteItemModal (id) {
+        this.activeItemId = id
         this.isDeleteModalOpen = true
       },
       closeDeleteItemModal () {

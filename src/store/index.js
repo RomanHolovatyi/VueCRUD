@@ -13,17 +13,21 @@ const getters = {
 
 const actions = {
   createTableItem ({ commit }, newItem) {
-    localStorage.setItem('tableData', JSON.stringify([...state.tableData, newItem]))
-    commit(types.UPDATE_TABLE_ITEMS, newItem)
+    const newTableData = [...state.tableData, newItem]
+    commit(types.SET_TABLE_ITEMS, newTableData)
   },
-  deleteTableItem ({ commit }, itemId) {
-
+  deleteTableItem ({ commit }, deletedItemId) {
+    const newTableData = state.tableData.filter((tableItem) => {
+      return (deletedItemId !== tableItem.id)
+    })
+    commit(types.SET_TABLE_ITEMS, newTableData)
   }
 }
 
 const mutations = {
-  [types.UPDATE_TABLE_ITEMS] (state, newItem) {
-    state.tableData = [...state.tableData, newItem]
+  [types.SET_TABLE_ITEMS] (state, newTableData) {
+    localStorage.setItem('tableData', JSON.stringify([...newTableData]))
+    state.tableData = [...newTableData]
   }
 }
 
