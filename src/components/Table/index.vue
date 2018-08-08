@@ -1,55 +1,61 @@
 <template>
-  <div class="mt-3">
-    <v-data-table
-      :headers="headers"
-      :items="tableData"
-      disable-initial-sort
-      hide-actions
-      class="elevation-1"
-    >
-      <template slot="items" slot-scope="props">
-        <td class="text-xs-left">{{ props.item.id }}</td>
-        <td class="text-xs-left">{{ props.item.name }}</td>
-        <td class="text-xs-left">{{ props.item.description }}</td>
-        <td class="text-xs-center">
-          <v-btn
-            color="blue"
-            fab
-            flat
-            slot="activator"
-            @click="editItem(props.item.id)"
-          >
-            <v-icon>edit</v-icon>
-          </v-btn>
-          <v-btn
-            color="red"
-            fab
-            flat
-            slot="activator"
-            @click="openDeleteItemModal(props.item.id)"
-          >
-            <v-icon>delete</v-icon>
-          </v-btn>
-        </td>
-      </template>
-      <template slot="no-data">
-        <v-alert
-          :value="true"
-          color="red dark"
-          icon="warning"
-        >
-          Sorry, nothing to display here :(
-        </v-alert>
-      </template>
-    </v-data-table>
-    <div class="text-xs-center pt-2">
-      <v-btn
-        color="primary"
-        @click="createNewItem"
+  <v-layout
+    justify-center
+    class="pa-3"
+  >
+    <v-flex xs8>
+      <v-data-table
+        :headers="headers"
+        :items="tableData"
+        disable-initial-sort
+        hide-actions
+        class="elevation-1"
       >
-        Create New Item
-      </v-btn>
-    </div>
+        <template slot="items" slot-scope="props">
+          <td class="text-xs-left">{{ props.item.id }}</td>
+          <td class="text-xs-left">{{ props.item.name }}</td>
+          <td class="text-xs-left">{{ props.item.description }}</td>
+          <td class="text-xs-center">
+            <v-btn
+              color="blue"
+              fab
+              flat
+              slot="activator"
+              @click="editItem(props.item.id)"
+            >
+              <v-icon>edit</v-icon>
+            </v-btn>
+            <v-btn
+              color="red"
+              fab
+              flat
+              slot="activator"
+              @click="openDeleteItemModal(props.item.id)"
+            >
+              <v-icon>delete</v-icon>
+            </v-btn>
+          </td>
+        </template>
+        <template slot="no-data">
+          <v-alert
+            :value="true"
+            color="red dark"
+            icon="warning"
+          >
+            Sorry, nothing to display here :(
+          </v-alert>
+        </template>
+      </v-data-table>
+      <div class="text-xs-center pt-2">
+        <v-btn
+          color="primary"
+          @click="createNewItem"
+        >
+          Create New Item
+        </v-btn>
+      </div>
+    </v-flex>
+
     <v-dialog
       v-model="isDeleteModalOpen"
       max-width="400"
@@ -76,7 +82,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-  </div>
+  </v-layout>
 </template>
 
 <script>

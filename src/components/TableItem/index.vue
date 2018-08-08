@@ -1,6 +1,9 @@
 <template>
-  <v-layout fluid>
-    <v-flex fluid>
+  <v-layout
+    justify-center
+    class="pa-3"
+  >
+    <v-flex xs8>
       <v-card fluid>
         <v-card-title>
           <span class="headline">{{ getActionType }} item</span>
