@@ -26,7 +26,7 @@
             fab
             flat
             slot="activator"
-            @click="openEditAdminModal(props.item)"
+            @click="openDeleteItemModal(props.item)"
           >
             <v-icon>delete</v-icon>
           </v-btn>
@@ -43,13 +43,33 @@
       </template>
     </v-data-table>
     <div class="text-xs-center pt-2">
-      <v-btn color="blue darken-1" @click="createNewItem">Create New Item</v-btn>
+      <v-btn
+        color="primary"
+        @click="createNewItem"
+      >
+        Create New Item
+      </v-btn>
     </div>
+    <v-dialog
+      v-model="isDeleteModalOpen"
+      max-width="400"
+      persistent
+    >
+      <v-card>
+        <v-card-title class="headline">Do you really want to delete this item?</v-card-title>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="error" flat @click="closeModal">Cancel</v-btn>
+          <v-btn color="primary" flat @click.native="dialog = false">Delete</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
 <script>
-  import { mapState } from 'vuex'
+  import { mapState, mapActions } from 'vuex'
+
   export default {
     name: 'Table',
     data () {
@@ -65,13 +85,7 @@
           { text: 'Description', value: 'description', align: 'center', sortable: true },
           { text: 'Actions', align: 'center', value: 'actions', sortable: false }
         ],
-        tableItems: [
-          {
-            id: 1,
-            name: 'name123',
-            description: 'wq qur weufewu wefwf'
-          }
-        ]
+        isDeleteModalOpen: false
       }
     },
     computed: {
@@ -80,8 +94,17 @@
       ])
     },
     methods: {
+      ...mapActions([
+        'deleteTableItem'
+      ]),
       createNewItem () {
         this.$router.push({ path: '/table-item' })
+      },
+      openDeleteItemModal () {
+        this.isDeleteModalOpen = true
+      },
+      closeDeleteItemModal () {
+        this.isDeleteModalOpen = false
       }
     }
   }

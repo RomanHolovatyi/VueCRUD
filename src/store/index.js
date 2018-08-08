@@ -15,6 +15,9 @@ const actions = {
   createTableItem ({ commit }, newItem) {
     localStorage.setItem('tableData', JSON.stringify([...state.tableData, newItem]))
     commit(types.UPDATE_TABLE_ITEMS, newItem)
+  },
+  deleteTableItem ({ commit }, itemId) {
+
   }
 }
 
