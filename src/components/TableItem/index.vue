@@ -51,13 +51,6 @@
       getActionType () {
         return 'create'
       }
-      // errorMessages (field) {
-      //   if (this.hasFieldError) {
-      //     return 'This field is required'
-      //   } else {
-      //     return []
-      //   }
-      // }
     },
     validations: {
       formData: {
@@ -85,10 +78,15 @@
       cancel () {
         this.$router.push({ path: '/' })
       },
+      createId () {
+        return `_${Math.random().toString(36).substr(2, 16)}`
+      },
       save () {
         this.$v.formData.$touch()
         if (this.$v.formData.$invalid) return
+        this.formData.id = this.createId()
         this.createTableItem(this.formData)
+        this.cancel()
       }
     }
   }
