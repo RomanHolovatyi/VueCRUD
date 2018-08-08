@@ -5,7 +5,7 @@ import * as types from './mutation-types'
 Vue.use(Vuex)
 
 const state = {
-  tableData: []
+  tableData: JSON.parse(localStorage.getItem('tableData')) || []
 }
 
 const getters = {
@@ -13,7 +13,7 @@ const getters = {
 
 const actions = {
   createTableItem ({ commit }, newItem) {
-    localStorage.setItem('tableData', JSON.stringify([...state.tableData], newItem))
+    localStorage.setItem('tableData', JSON.stringify([...state.tableData, newItem]))
     commit(types.UPDATE_TABLE_ITEMS, newItem)
   }
 }
